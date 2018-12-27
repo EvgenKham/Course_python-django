@@ -12,7 +12,7 @@ def about(request):
 def contacts(request):
     return HttpResponseRedirect("/about")
 
-# '''Functions for work parameters url'''
+
 # def products(request, productid=13):
 #     output = "<h2>Product № {0}</h2>".format(productid)
 #     return HttpResponse(output)
@@ -24,7 +24,6 @@ def contacts(request):
 #     return HttpResponse(output)
 
 
-# '''Functions for work parameters string request'''
 def products(request, productid=3):
     category = request.GET.get("cat", "")
     output = "<h2>Product № {0}  Category: {1}</h2>".format(productid, category)
