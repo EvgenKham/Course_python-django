@@ -1,16 +1,22 @@
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
 
 def index(request):
-    return HttpResponse("<h2>Главная</h2>")
+    header = "Personal date"
+    langs = ["rus", "by", "en"]
+    user = {"name": "Petr", "age": 23}
+    addr = ("Lenina", 34, 12)
+    data = {"header": header, "user": user, "address": addr, "languages": langs}
+    return render(request, "home.html", context=data)
 
 
 def about(request):
-    return HttpResponse("<h2>О нас</h2>")
+    return render(request, "about.html")
 
 
 def contacts(request):
-    return HttpResponseRedirect("/about")
+    return render(request, "contacts.html")
 
 
 # def products(request, productid=13):
@@ -18,7 +24,7 @@ def contacts(request):
 #     return HttpResponse(output)
 
 
-# def users(request, id=7, name="Ivan"):
+# def my_internet_shop(request, id=7, name="Ivan"):
 #     output = "<h2>User</h2>" \
 #              "<h3>id: {0}  name: {1}</h3>".format(id, name)
 #     return HttpResponse(output)

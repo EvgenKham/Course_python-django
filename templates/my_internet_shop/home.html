@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} Welcome to shop {% endblock title %}
+{% block header %}Добро пожаловать в интернет магазин{% endblock header %}
+{% block photo %} src="{% static "images/shop.jpg" %}" alt="Photo shops" {% endblock photo %}
+{% block content %}
+<p>Name: {{ user.name}}, Age: {{ user.age}}</p>
+<p>Address: st.{{ address.0 }}, h.{{ address.1 }}, ap.{{ address.2 }}</p>
+<p>Language: {{ languages.2}}</p>
+{% endblock content %}

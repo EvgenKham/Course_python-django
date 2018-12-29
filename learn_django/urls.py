@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from users import views
+from my_internet_shop import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     # re_path(r"^product/$", views.products),
     # re_path(r"^product/(?P<productid>\d+)/", views.products),
-    # re_path(r"^users/$", views.users),
-    # re_path(r"^users/(?P<id>\d+)/(?P<name>\D+)/", views.users),
+    # re_path(r"^my_internet_shop/$", views.my_internet_shop),
+    # re_path(r"^my_internet_shop/(?P<id>\d+)/(?P<name>\D+)/", views.my_internet_shop),
 
     path("products/", views.products),
     path("products/<int:productid>/", views.products),
@@ -30,7 +31,7 @@ urlpatterns = [
     path("users/<int:id>/<name>/", views.users),
 
     path("", views.index, name='home'),
-    re_path(r"^about", views.about, name='about'),
-    re_path(r"^contacts", views.contacts, name='contacts'),
+    re_path(r"^about", TemplateView.as_view(template_name="about.html")),
+    re_path(r"^contacts", TemplateView.as_view(template_name="contacts.html")),
     path('admin/', admin.site.urls),
 ]
