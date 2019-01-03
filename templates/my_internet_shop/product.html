@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} Product {% endblock title %}
+{% block header %}Заказ товара{% endblock header %}
+{% block photo %}  {% endblock photo %}
+{% block content %}
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <table>
+            <tr><th>Category</th><th>Value</th></tr>
+            <tr><th>Id product</th><th>{{ id }}</th></tr>
+            <tr><th>Name product</th><th>{{ name }}</th></tr>
+            <tr><th>Count</th><th>{{ count }}</th></tr>
+            <tr><th>Data order</th><th>{{ data }}</th></tr>
+        </table>
+    </form>
+{% endblock content %}

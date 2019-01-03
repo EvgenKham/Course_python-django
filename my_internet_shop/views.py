@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from .forms import ProductForm
 
 
 def index(request):
@@ -19,21 +20,24 @@ def contacts(request):
     return render(request, "contacts.html")
 
 
-# def products(request, productid=13):
-#     output = "<h2>Product № {0}</h2>".format(productid)
-#     return HttpResponse(output)
+def products(request):
+    if request.method == "POST":
+        productForm = ProductForm(request.POST)
+        if productForm.is_valid():
+            # 
+            id_product = productForm.cleaned_data["id"]
+            name_product = productForm.cleaned_data["name_product"]
+            count = productForm.cleaned_data["count"]
+            product = {"id": id_product, "name": name_product, "count": count}
+            return render(request, "product.html", context=product)
+        else:
+            return HttpResponse("Invalid data")
 
+        # return render(request, "product.html", context=product)
 
-# def my_internet_shop(request, id=7, name="Ivan"):
-#     output = "<h2>User</h2>" \
-#              "<h3>id: {0}  name: {1}</h3>".format(id, name)
-#     return HttpResponse(output)
-
-
-def products(request, productid=3):
-    category = request.GET.get("cat", "")
-    output = "<h2>Product № {0}  Category: {1}</h2>".format(productid, category)
-    return HttpResponse(output)
+    else:
+        productForm = ProductForm()
+        return render(request, "product_order.html", context={"form": productForm})
 
 
 def users(request):
