@@ -14,24 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
-from my_internet_shop import views
-from django.views.generic import TemplateView
+from django.urls import path, include
+# from my_internet_shop.views import *
+
 
 urlpatterns = [
-    # re_path(r"^product/$", views.products),
-    # re_path(r"^product/(?P<productid>\d+)/", views.products),
-    # re_path(r"^my_internet_shop/$", views.my_internet_shop),
-    # re_path(r"^my_internet_shop/(?P<id>\d+)/(?P<name>\D+)/", views.my_internet_shop),
 
-    path("products/", views.products),
-    path("products/<int:productid>/", views.products),
-
-    path("users/", views.users),
-    path("users/<int:id>/<name>/", views.users),
-
-    path("", views.index, name='home'),
-    re_path(r"^about", TemplateView.as_view(template_name="about.html")),
-    re_path(r"^contacts", TemplateView.as_view(template_name="contacts.html")),
     path('admin/', admin.site.urls),
+    # path('users', include('users')),
+    path('', include('my_internet_shop.urls')),
+
+
+    # path("users/", views.users),
+    # path("users/<int:id>/<name>/", views.users),
+    #
+    # path("", views.index),
+    # re_path(r"^about", TemplateView.as_view(template_name="about.html")),
+    # re_path(r"^contacts", TemplateView.as_view(template_name="contacts.html")),
+
 ]

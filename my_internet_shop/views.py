@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ProductForm
+from django.views.generic import DetailView, ListView
+from my_internet_shop.models import Electrics, MobilePhone, TV, Television, Projector
 
 
 def index(request):
@@ -24,17 +26,12 @@ def products(request):
     if request.method == "POST":
         productForm = ProductForm(request.POST)
         if productForm.is_valid():
-            # 
-            id_product = productForm.cleaned_data["id"]
             name_product = productForm.cleaned_data["name_product"]
             count = productForm.cleaned_data["count"]
-            product = {"id": id_product, "name": name_product, "count": count}
+            product = {"name": name_product, "count": count}
             return render(request, "product.html", context=product)
         else:
             return HttpResponse("Invalid data")
-
-        # return render(request, "product.html", context=product)
-
     else:
         productForm = ProductForm()
         return render(request, "product_order.html", context={"form": productForm})
@@ -46,4 +43,18 @@ def users(request):
     output = "<h2>User</h2>" \
              "<h3>id: {0}  name: {1}</h3>".format(id, name)
     return HttpResponse(output)
+
+
+class MobilePhoneList(ListView):
+    template_name = 'mobile_phones_list.html'
+    queryset = MobilePhone.objects.all()
+    context_object_name = 'mobile_phones'
+    pass
+
+
+class MobilePhoneSingle(DetailView):
+    model = MobilePhone
+    template_name = 'mobile_phone_details.html'
+    context_object_name = 'mobile_phone'
+    pass
 

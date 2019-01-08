@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} |{{ mobile_phone.name}} {% endblock title %}
+{% block header %} Описание товара {% endblock header %}
+{% block photo %} src="{% static  "images/xiaomi mi 8 lite.jpeg"%}", alt="xiaomi mi 8 lite" {% endblock photo %}
+{% block content %}
+
+    <ul>
+        <li>Название: {{ mobile_phone.name }} </li>
+        <li>Количество товара: {{ mobile_phone.count }} </li>
+        <li>ОС: {{ mobile_phone.operation_system }} </li>
+        <li>ОЗУ: {{ mobile_phone.ram }} GB</li>
+        <li>Объем батреии: {{ mobile_phone.battery }} мАч</li>
+        <li>Цена: {{ mobile_phone.price }} руб.</li>
+    </ul>
+
+{% endblock content %}
