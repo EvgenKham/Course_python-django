@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} {{ mobile_phone.name}} {% endblock title %}
+{% block content %}
+
+    <div class="col-sm-4">
+        <img src="{{ mobile_phone.icon.url }}" alt="image phone" style="width: 80%; height: 250%" >
+    </div>
+
+    <div class="col-sm-8">
+        <h3 class="text-center">{{ mobile_phone.name }}</h3>
+        <p> {% lorem %} </p>
+        <hr>
+        <ul>
+            <li>Количество товара: {{ mobile_phone.count }} </li>
+            <li>ОС: {{ mobile_phone.operation_system }} </li>
+            <li>ОЗУ: {{ mobile_phone.ram }} GB</li>
+            <li>Объем батреии: {{ mobile_phone.battery }} мАч</li>
+            <li>Цена: {{ mobile_phone.price }} руб.</li>
+        </ul>
+        <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>
+    </div>
+
+{% endblock content %}

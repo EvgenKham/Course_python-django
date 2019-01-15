@@ -15,21 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from my_internet_shop.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+# from my_shop.views import *
 
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    # path('users', include('users')),
-    path('', include('my_internet_shop.urls')),
+    path('user/', include('users.urls')),
 
-
-    # path("users/", views.users),
-    # path("users/<int:id>/<name>/", views.users),
-    #
-    # path("", views.index),
-    # re_path(r"^about", TemplateView.as_view(template_name="about.html")),
-    # re_path(r"^contacts", TemplateView.as_view(template_name="contacts.html")),
-
+    # path('cart', include('cart.urls')),
+    # path('orders', include('orders.urls')),
+    path('', include('my_shop.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

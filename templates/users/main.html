@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} {% endblock title %}
+{% block header %} {% endblock header %}
+{% block content %}
+    <div class="top-bar">
+        <selection class="top-bar-selection">
+            <ul class="label-right">
+                {% if username %}
+                    <li><a href="registration.html">Выйти{{ username }}</a> </li>
+                {% else %}
+                    <li><a href="login.html">Войти{{ username }}</a> </li>
+                {% endif %}
+            </ul>
+        </selection>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div class="col-sm-12">
+        <h2>{{ category.name}}</h2>
+        <hr>
+    {% for phone in mobile_phones %}
+        <div>
+            <ul>
+                <li>
+                    <a href="{{ phone.get_absolute_url }}">{{ phone.name }}</a>
+                </li>
+            </ul>
+        </div>
+
+    {% endfor %}
+
+    </div>
+{% endblock content %}

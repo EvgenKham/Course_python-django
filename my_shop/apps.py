@@ -2,4 +2,4 @@
 
 
 #class UsersConfig(AppConfig):
-#    name = 'my_internet_shop'
+#    name = 'my_shop'
