@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Авторизация {% endblock title %}
+
+{% block content %}
+    <div class="col-sm-8 col-sm-offset-2">
+    <form method="post" action="">
+    {% csrf_token %}
+        <fieldset >
+            <legend class="text-center">Авторизация</legend>
+            <p><label for="username"> Username </label> <input type="text" id="id_username"> </p>
+            <p><label for="password"> Password </label> <input type="text" id="id_password"></p>
+        </fieldset>
+    <input type="submit" value="Войти" />
+    </form>
+
+    {% if form.error %}
+        <p class="error">Сожалеем, вы не правильно ввели логин или пароль</p>
+    {% endif %}
+    </div>
+
+{% endblock content %}

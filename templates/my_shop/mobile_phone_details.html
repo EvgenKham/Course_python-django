@@ -18,7 +18,12 @@
             <li>Объем батреии: {{ mobile_phone.battery }} мАч</li>
             <li>Цена: {{ mobile_phone.price }} руб.</li>
         </ul>
-        <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>
+        {% if request.user.is_authenticated %}
+            <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>
+        {% else %}
+            <p class="text-center">Заказать товар могут только авторизированые пользователи.
+                Пожалуйста, <a href="{% url 'login' %}">войдите </a> или <a href="{% url 'register' %}"> зарегистрируйтесь</a></p>
+        {% endif %}
     </div>
 
 {% endblock content %}
