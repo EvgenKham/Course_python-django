@@ -28,6 +28,7 @@ class MobilePhoneAdmin(admin.ModelAdmin):
 class ProjectorAdmin(admin.ModelAdmin):
     list_display = [
                     'name',
+                    'icon',
                     'slug',
                     'count',
                     'bright',
@@ -40,7 +41,8 @@ class ProjectorAdmin(admin.ModelAdmin):
 class TVAdmin(admin.ModelAdmin):
     list_display = [
                     'name',
-                    'slug_name',
+                    'icon',
+                    'slug',
                     'count',
                     'diagonal',
                     'screen',
@@ -48,7 +50,7 @@ class TVAdmin(admin.ModelAdmin):
                     'price'
                     ]
     list_editable = ['price']
-    prepopulated_fields = {'slug_name': ('name',),
+    prepopulated_fields = {'slug': ('name',),
                            'slug_screen': ('screen',)}
 
 

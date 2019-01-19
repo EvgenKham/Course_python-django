@@ -36,7 +36,7 @@ class Category(models.Model):
 class MobilePhone(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, default="0000000")
     icon = models.ImageField(upload_to=image_folder, blank=True, verbose_name="Иконка товара",
-                             default="my_shop/phone_icons/default_phone.png")
+                             default="my_shop/default_phone.png")
     name = models.CharField(max_length=100, verbose_name='Название', db_index=True)
     slug = models.SlugField(max_length=100, db_index=True, blank=True)
     count = models.IntegerField(verbose_name='Количество товаров', db_index=True)
@@ -64,8 +64,10 @@ class MobilePhone(models.Model):
 
 class TV(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, default="0000000")
+    icon = models.ImageField(upload_to=image_folder, blank=True, verbose_name="Иконка товара",
+                             default="my_shop/phone_icons/default_phone.png")
     name = models.CharField(max_length=100, db_index=True, verbose_name='Название')
-    slug_name = models.SlugField(max_length=100, db_index=True, blank=True)
+    slug = models.SlugField(max_length=100, db_index=True, blank=True)
     count = models.IntegerField(verbose_name='Количество товаров', db_index=True)
     diagonal = models.FloatField(verbose_name='Диагональ', db_index=True)
     screen = models.CharField(max_length=100, verbose_name='Разрешение', db_index=True)
@@ -75,7 +77,7 @@ class TV(models.Model):
     class Meta:
         ordering = ['name']
         index_together = [
-            'id', 'name', 'slug_name'
+            'id', 'name', 'slug'
         ]
         verbose_name = "Телевизор"
         verbose_name_plural = "Телевизоры"
@@ -85,11 +87,13 @@ class TV(models.Model):
         pass
 
     def get_absolute_url(self):
-        return reverse('tv_detail', kwargs={'slug': self.slug_name})
+        return reverse('tv_detail', kwargs={'slug': self.slug})
 
 
 class Projector(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, default="0000000")
+    icon = models.ImageField(upload_to=image_folder, blank=True, verbose_name="Иконка товара",
+                             default="my_shop/phone_icons/default_phone.png")
     name = models.CharField(max_length=100, verbose_name='Название', db_index=True)
     slug = models.SlugField(max_length=100, db_index=True, blank=True)
     count = models.IntegerField(verbose_name='Количество товаров', db_index=True)

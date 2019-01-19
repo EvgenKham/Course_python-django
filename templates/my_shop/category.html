@@ -3,18 +3,38 @@
 {% block content %}
 
     <div class="col-sm-12">
-        <h2>{{ category.name}}</h2>
+        <h2>{{ category }}</h2>
         <hr>
-    {% for phone in mobile_phones %}
-        <div>
-            <ul>
-                <li>
-                    <a href="{{ phone.get_absolute_url }}">{{ phone.name }}</a>
-                </li>
-            </ul>
-        </div>
-
-    {% endfor %}
-
+        {% if category.name == 'Мобильные телефоны' %}
+            {% for item in mobile_phones %}
+                <div>
+                    <ul>
+                        <li>
+                            <a href="{{ item.get_absolute_url }}">{{ item }}</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endfor %}
+        {% elif category.name == 'Проекторы' %}
+            {% for item in projectors %}
+                <div>
+                    <ul>
+                        <li>
+                            <a href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% for item in tvs %}
+                <div>
+                    <ul>
+                        <li>
+                            <a href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock content %}

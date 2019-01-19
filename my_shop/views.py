@@ -16,6 +16,8 @@ class Index(ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['mobile_phones'] = MobilePhone.objects.all()
+        context['projector'] = Projector.objects.all()
+        context['tv'] = TV.objects.all()
         return context
         pass
 
@@ -28,27 +30,12 @@ class CategorySinger(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['categories'] = Category.objects.all()
-        context['category'] = Category.objects.get(slug="mobilnye-telefony")
+        context['categories'] = Category.objects.all()
         context['mobile_phones'] = MobilePhone.objects.all()
+        context['projectors'] = Projector.objects.all()
+        context['tvs'] = TV.objects.all()
         return context
         pass
-
-
-# class MobilePhoneList(ListView):
-#     template_name = 'mobile_phones_list.html'
-#     queryset = MobilePhone.objects.all()
-#     context_object_name = 'mobile_phones'
-#
-#     # model = Category
-#     model = MobilePhone
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['categories'] = Category.objects.all()
-#         context['mobile_phones'] = MobilePhone.objects.all()
-#         return context
-#         pass
 
 
 class MobilePhoneSingle(DetailView):
@@ -60,21 +47,37 @@ class MobilePhoneSingle(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['categories'] = Category.objects.all()
+        context['categories'] = Category.objects.all()
         context['mobile_phones'] = MobilePhone.objects.all()
         return context
         pass
 
-# class CategorySinger(ListView):
-#
-#     template_name = 'cat_details.html'
-#
-#     def get_queryset(self):
-#         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
-#         return MobilePhone.objects.filter(category=self.category)
-#         pass
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(CategorySinger, self).get_context_data(**kwargs)
-#         return context
-#         pass
+
+class ProjectorSinger(DetailView):
+    """     View для представления подрабной информации о проекторе   """
+    model = Projector
+    template_name = 'projector_details.html'
+    context_object_name = 'projector'
+    pass
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['projectors'] = Projector.objects.all()
+        return context
+        pass
+
+
+class TVSinger(DetailView):
+    """     View для представления подрабной информации о телевизоре   """
+    model = TV
+    template_name = 'tv_details.html'
+    context_object_name = 'tv'
+    pass
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['tvs'] = TV.objects.all()
+        return context
+        pass
