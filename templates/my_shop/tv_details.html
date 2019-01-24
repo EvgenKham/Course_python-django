@@ -4,6 +4,7 @@
 {% block content %}
 
     <div class="col-sm-4">
+        <br>
         <img src="{{ tv.icon.url }}" alt="image phone" style="width: 100%; height: 250%" >
     </div>
 
@@ -18,6 +19,11 @@
             <li>Цена: {{ tv.price }} руб.</li>
         </ul>
         {% if request.user.is_authenticated %}
+{#            <form action="{% url "cart:CartAdd" tv.id %}" method="post" >#}
+{#                {{ cart_product_form.quantity }}#}
+{#                {% csrf_token %}#}
+{#                <input type="submit" class="btn btn-danger" value="Добавить в карзину">#}
+{#            </form>#}
             <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>
         {% else %}
             <p class="text-center">Заказать товар могут только авторизированые пользователи.

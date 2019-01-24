@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% block title %}Категории{% endblock title %}
 {% block content %}
 
     <div class="col-sm-12">
@@ -25,7 +26,7 @@
                     </ul>
                 </div>
             {% endfor %}
-        {% else %}
+        {% elif category.name == 'Телевизоры' %}
             {% for item in tvs %}
                 <div>
                     <ul>

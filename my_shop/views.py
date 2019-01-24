@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from my_shop.models import *
+from cart.forms import CartAddProductForm
+from cart.models import Cart
 
 
 class Index(ListView):
@@ -14,10 +16,10 @@ class Index(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
         context['mobile_phones'] = MobilePhone.objects.all()
-        context['projector'] = Projector.objects.all()
-        context['tv'] = TV.objects.all()
+        context['projectors'] = Projector.objects.all()
+        context['tvs'] = TV.objects.all()
+        context['cart'] = Cart.item_count
         return context
         pass
 
@@ -34,6 +36,7 @@ class CategorySinger(DetailView):
         context['mobile_phones'] = MobilePhone.objects.all()
         context['projectors'] = Projector.objects.all()
         context['tvs'] = TV.objects.all()
+
         return context
         pass
 
@@ -49,6 +52,7 @@ class MobilePhoneSingle(DetailView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['mobile_phones'] = MobilePhone.objects.all()
+        context['cart_product_form'] = CartAddProductForm()
         return context
         pass
 
@@ -64,6 +68,7 @@ class ProjectorSinger(DetailView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['projectors'] = Projector.objects.all()
+        context['cart_product_form'] = CartAddProductForm()
         return context
         pass
 
@@ -79,5 +84,6 @@ class TVSinger(DetailView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['tvs'] = TV.objects.all()
+        context['cart_product_form'] = CartAddProductForm()
         return context
         pass

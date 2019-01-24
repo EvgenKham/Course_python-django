@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Спасибо{% endblock title %}
+
+{% block content %}
+    <div class="col-sm-8">
+        <h1 class="text-center">Спасибо, что использовали наш сервис</h1>
+        <br>
+        <p>Ваш заказ успешно сформирован. Номер вашего заказа <strong>{{ order.id }}</strong>.</p>
+        <h3>При доставке оплата наличными</h3>
+
+    </div>
+{% endblock content %}

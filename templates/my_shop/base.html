@@ -49,22 +49,30 @@
                         </ul>
                     </li>
                     {% endif %}
-                    {% if not request.user.is_authenticated %}
-                        <li>
-                            <a class="navbar-link" href="{% url 'login' %}" role="button">Войти</a>
-                        </li>
-                        <li>
-                            <p class="navbar-text">Здравствуйте, гость </p>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a class="navbar-link" href="{% url 'logout' %}" role="button">Выйти</a>
-                        </li>
-                        <li>
-                            <p class="navbar-text">Здравствуйте, {{ request.user.username }} </p>
-                        </li>
-                    {% endif %}
                 </ul>
+                <ul class="nav navbar-nav navbar">
+                {% if not request.user.is_authenticated %}
+                        <ul class="nav navbar-nav">
+                            <li><a class="navbar-link" href="{% url 'login' %}" role="button">Войти</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a>Здравствуйте, гость </a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav navbar-nav">
+                            <li><a class="navbar-link" href="{% url 'logout' %}" role="button">Выйти</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a>Здравствуйте, {{ request.user.username }} </a></li>
+                        </ul>
+                    {% endif %}
+
+                </ul>
+                {% if request.user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url "cart:CartDetail" %}">Корзина<span class="badge">{{ cart.item_count }}</span></a></li>
+                    </ul>
+                {% endif %}
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -78,9 +86,9 @@
 
             <div class="col-md-3">
                 <p class="lead">EvgenShop</p>
-                <div class="list-group">
+                <div class="list-group" >
                     {% for category in categories %}
-                    <a href="{{ category.get_absolute_url }}" class="list-group-item">{{ category.name }}</a>
+                    <a href="{{ category.get_absolute_url }}" class="list-group-item" >{{ category.name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -89,53 +97,57 @@
 
                 <div class="row carousel-holder">
 
-{#                    <div class="col-md-12">#}
-{#                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">#}
-{#                            <ol class="carousel-indicators">#}
-{#                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>#}
-{#                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>#}
-{#                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>#}
-{#                            </ol>#}
-{#                            <div class="carousel-inner">#}
-{#                                <div class="item active">#}
-{#                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">#}
-{#                                <span class="glyphicon glyphicon-chevron-left"></span>#}
-{#                            </a>#}
-{#                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">#}
-{#                                <span class="glyphicon glyphicon-chevron-right"></span>#}
-{#                            </a>#}
-{#                        </div>#}
-{#                    </div>#}
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for product in tvs %}
+                                    {% if forloop.first %}
+                                        <div class="item active">
+                                            <img class="slide-image" src="{{ product.icon.url }}"  alt=""
+                                                 style="padding-left: 260px; padding-right: 260px; height: 230px">
+                                            <p class="text-center"><a href="{{ product.get_absolute_url }}">
+                                                <button class="btn btn-primary">{{ product.name }}</button></a></p>
+                                        </div>
+                                    {% else %}
+                                        <div class="item">
+                                            <img class="slide-image" src="{{ product.icon.url }}" alt=""
+                                                 style="padding-left: 260px; padding-right: 260px; height: 230px">
+                                            <p class="text-center"><a href="{{ product.get_absolute_url }}">
+                                                <button class="btn btn-primary">{{ product.name }}</button></a></p>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="background: transparent">
+                                <span class="glyphicon glyphicon-chevron-left" style="color: black"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="background: transparent">
+                                <span class="glyphicon glyphicon-chevron-right" style="color: black"></span>
+                            </a>
+                        </div>
+                    </div>
 
                 </div>
                 <br>
 
-                <div class="row">
-
-                    {% for mobile_phone in mobile_phones %}
+                <div class="row" >
+                    {% for phone in mobile_phones %}
+                        {% if phone.id <= 3  %}
                         <div class="col-sm-4 col-lg-4 col-md-4">
 
                             <div class="thumbnail">
-                                <img src="{{ mobile_phone.icon.url }}" alt="" style="width: 40%; height: 40% ">
+                                <img src="{{ phone.icon.url }}" alt="" style="width: 40%; height: 40%" >
                                 <div class="caption">
-                                    <h4 class="pull-right">{{ mobile_phone.price }} руб.</h4>
-                                    <h5><strong><a href="{{ mobile_phone.get_absolute_url }}">{{ mobile_phone.name }}</a></strong></h5>
-
+                                    <h4 class="pull-right">{{ phone.price }} руб.</h4>
+                                    <h5><strong><a href="{{ phone.get_absolute_url }}">{{ phone.name }}</a></strong></h5>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
 
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
             </div>
             {% if not request.user.is_authenticated %}
             <p class="text-center">Заказать товар могут только авторизированые пользователи.

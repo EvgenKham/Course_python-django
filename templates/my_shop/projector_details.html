@@ -18,6 +18,11 @@
             <li>Цена: {{ projector.price }} руб.</li>
         </ul>
         {% if request.user.is_authenticated %}
+{#            <form action="{% url "cart:CartAdd" projector.id %}" method="post" >#}
+{#                {{ cart_product_form.quantity }}#}
+{#                {% csrf_token %}#}
+{#                <input type="submit" class="btn btn-danger" value="Добавить в карзину">#}
+{#            </form>#}
             <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>
         {% else %}
             <p class="text-center">Заказать товар могут только авторизированые пользователи.

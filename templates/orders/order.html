@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Ваш заказ{% endblock title %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="text-center">Оформление заказа</h1>
+            <br>
 
-</body>
-</html>
+            <div class="text-left">
+               <h2 class="text-left">Ваш заказ:</h2>
+                    <ul>
+                      {% for item in cart  %}
+                          <li>{{ item.product.name }}</li>
+                          <li>Количество: {{ item.quantity }} </li>
+                          <li>Цена: {{ item.total_price }}</li>
+                      {% endfor %}
+                    </ul>
+            </div>
+
+            <div class="col-sm-5">
+                <h4>Время, когда вы заберете заказ:</h4>
+                <br>
+                <form class="order-form" action="." method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Отправить">
+                </form>
+            </div>
+
+            {% if form.errors %}
+                <p class="error">Сожалеем, вы неправильно ввели логин или пароль</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}
