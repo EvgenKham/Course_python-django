@@ -17,15 +17,20 @@ class TestMobilePhoneModel(TestCase):
                                                 battery=3700,
                                                 price=3245.0)
 
-        self.test_phone = Category.objects.get(id=1)
+        self.test_phone = MobilePhone.objects.get(name='Apple X')
         pass
 
     def tearDown(self):
         # Очистка после каждого метода
         pass
 
-    def test_name_max_length(self):
+    def test_name_max_length_mobile_phone(self):
         max_length = self.test_phone._meta.get_field('name').max_length
         self.assertEquals(max_length, 100)
         pass
 
+    def test_get_absolute_url_mobile_phone(self):
+        self.assertEquals(self.test_phone.get_absolute_url(), '/phone/apple-x/')
+
+    def test_str_mobile_phone(self):
+        self.assertEquals(self.test_phone.__str__(), 'Apple X')
