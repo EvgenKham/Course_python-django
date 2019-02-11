@@ -36,6 +36,7 @@ class CategorySinger(DetailView):
         context['mobile_phones'] = MobilePhone.objects.all()
         context['projectors'] = Projector.objects.all()
         context['tvs'] = TV.objects.all()
+        # context['cart'] = Cart.item_count
 
         return context
         pass
@@ -53,6 +54,7 @@ class MobilePhoneSingle(DetailView):
         context['categories'] = Category.objects.all()
         context['mobile_phones'] = MobilePhone.objects.all()
         context['cart_product_form'] = CartAddProductForm()
+        # context['cart'] = Cart.item_count
         return context
         pass
 
@@ -69,6 +71,7 @@ class ProjectorSinger(DetailView):
         context['categories'] = Category.objects.all()
         context['projectors'] = Projector.objects.all()
         context['cart_product_form'] = CartAddProductForm()
+        # context['cart'] = Cart.item_count
         return context
         pass
 
@@ -85,5 +88,6 @@ class TVSinger(DetailView):
         context['categories'] = Category.objects.all()
         context['tvs'] = TV.objects.all()
         context['cart_product_form'] = CartAddProductForm()
+        # context['cart'] = Cart.item_count
         return context
         pass

@@ -27,4 +27,3 @@ def OrderCreate(request):
 
     return render(request, 'order.html', {'cart': cart, 'form': form})
     pass
-

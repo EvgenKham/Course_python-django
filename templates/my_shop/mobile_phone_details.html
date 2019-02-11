@@ -6,10 +6,14 @@
     <div class="col-sm-4">
         <img src="{{ mobile_phone.icon.url }}" alt="image phone" style="width: 80%; height: 250%" >
     </div>
+    <div>
+        <li>hxfhcfjvg</li>
+
+    </div>
 
     <div class="col-sm-8">
         <h3 class="text-center">{{ mobile_phone.name }}</h3>
-        <p> {% lorem %} </p>
+        <p> {% lorem 2 b random %} </p>
         <hr>
         <ul>
             <li>Количество товара: {{ mobile_phone.count }} </li>
@@ -19,7 +23,7 @@
             <li>Цена: {{ mobile_phone.price }} руб.</li>
         </ul>
         {% if request.user.is_authenticated %}
-            <form action="{% url "cart:CartAdd" mobile_phone.id %}" method="post" >
+            <form action="{% url "cart:CartAdd" mobile_phone.category_id mobile_phone.id  %}" method="post" >
                 {{ cart_product_form.quantity }}
                 {% csrf_token %}
                 <input type="submit" class="btn btn-danger" value="Добавить в карзину">

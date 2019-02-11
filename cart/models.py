@@ -1,9 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from my_shop.models import MobilePhone, Projector, TV
-
-from my_shop.models import *
+from my_shop.models import Category, MobilePhone, Projector, TV
 
 
 class Cart:
@@ -19,15 +17,15 @@ class Cart:
 
     def add(self, product, quantity=1, update_quantity=False):
         """Добавление товара в корзину"""
-        product_id = str(product.id)
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0,
-                                     'price': str(product.price)
-                                     }
+        product_name = str(product.name)
+        if product_name not in self.cart:
+            self.cart[product_name] = {'quantity': 0,
+                                       'price': str(product.price)
+                                       }
         if update_quantity:
-            self.cart[product_id]['quantity'] = quantity
+            self.cart[product_name]['quantity'] = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[product_name]['quantity'] += quantity
         self.save()
 
     def save(self):
@@ -36,17 +34,21 @@ class Cart:
         self.session.modified = True
 
     def remove(self, product):
-        """Удаление продукта из карзины"""
-        product_id = str(product.id)
-        if product_id in self.cart:
-            del self.cart[product_id]
+        """Удаление продукта из корзины"""
+        product_name = str(product.name)
+        if product_name in self.cart:
+            del self.cart[product_name]
             self.save()
 
     def __iter__(self):
         """ Итерация по товарам """
-        products = MobilePhone.objects.filter(id__in=self.cart.keys())
-        for product in products:
-            self.cart[str(product.id)]['product'] = product
+        products = (MobilePhone.objects.filter(name__in=self.cart.keys()),
+                    TV.objects.filter(name__in=self.cart.keys()),
+                    Projector.objects.filter(name__in=self.cart.keys()))
+
+        for items in products:
+            for product in items:
+                self.cart[str(product.name)]['product'] = product
 
         for item in self.cart.values():
             item['price'] = item['price']
@@ -67,4 +69,3 @@ class Cart:
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
         pass
-

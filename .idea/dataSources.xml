@@ -8,6 +8,7 @@
       <remarks>$PROJECT_DIR$/learn_django/settings.py</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/myshop</jdbc-url>
+      <default-dialect>PostgreSQL</default-dialect>
     </data-source>
   </component>
 </project>

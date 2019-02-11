@@ -10,7 +10,7 @@
 
     <div class="col-sm-8">
         <h3 class="text-center">{{ projector.name }}</h3>
-        <p> {% lorem %} </p>
+        <p> {% lorem 2 p random %} </p>
         <hr>
         <ul>
             <li>Количество товара: {{ projector.count }} </li>
@@ -18,12 +18,12 @@
             <li>Цена: {{ projector.price }} руб.</li>
         </ul>
         {% if request.user.is_authenticated %}
-{#            <form action="{% url "cart:CartAdd" projector.id %}" method="post" >#}
-{#                {{ cart_product_form.quantity }}#}
-{#                {% csrf_token %}#}
-{#                <input type="submit" class="btn btn-danger" value="Добавить в карзину">#}
-{#            </form>#}
-            <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>
+            <form action="{% url "cart:CartAdd" projector.category_id projector.id %}" method="post" >
+                {{ cart_product_form.quantity }}
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Добавить в карзину">
+            </form>
+{#            <a href="#"></a> <button class="btn btn-danger">Добавить в карзину</button>#}
         {% else %}
             <p class="text-center">Заказать товар могут только авторизированые пользователи.
                 Пожалуйста, <a href="{% url 'login' %}">войдите </a> или <a href="{% url 'register' %}"> зарегистрируйтесь</a></p>

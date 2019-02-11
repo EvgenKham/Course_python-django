@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 def image_folder(instance, filename):
@@ -10,7 +11,7 @@ def image_folder(instance, filename):
     :return: Возвращаем строку, где первый агумент - имя новой паки, второй - имя файла
     """
     filename = instance.slug + '.' + filename.split('.')[1]
-    return "{0}/{1}".format("phone_icons", filename)
+    return "{0}/{1}".format("icons", filename)
 
 
 class Category(models.Model):
@@ -31,6 +32,16 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('category_detail', kwargs={'slug': self.slug})
+
+    @staticmethod
+    def get_object_by_id_category(cat_id, prod_id):
+        category_prod = Category.objects.get(id=cat_id)
+        if category_prod.name == "Мобильные телефоны":
+            return get_object_or_404(MobilePhone, id=prod_id)
+        elif category_prod.name == "Телевизоры":
+            return get_object_or_404(TV, id=prod_id)
+        elif category_prod.name == "Проекторы":
+            return get_object_or_404(Projector, id=prod_id)
 
 
 class MobilePhone(models.Model):

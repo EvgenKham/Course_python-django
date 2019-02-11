@@ -50,6 +50,7 @@
                     </li>
                     {% endif %}
                 </ul>
+
                 <ul class="nav navbar-nav navbar">
                 {% if not request.user.is_authenticated %}
                         <ul class="nav navbar-nav">
@@ -66,8 +67,8 @@
                             <li><a>Здравствуйте, {{ request.user.username }} </a></li>
                         </ul>
                     {% endif %}
-
                 </ul>
+
                 {% if request.user.is_authenticated %}
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{% url "cart:CartDetail" %}">Корзина<span class="badge">{{ cart.item_count }}</span></a></li>
@@ -131,10 +132,11 @@
                 <br>
 
                 <div class="row" >
-                    {% for phone in mobile_phones %}
-                        {% if phone.id <= 3  %}
-                        <div class="col-sm-4 col-lg-4 col-md-4">
 
+                    {% for phone in mobile_phones %}
+                        {% if forloop.counter0 < 3  %}
+
+                        <div class="col-sm-4 col-lg-4 col-md-4">
                             <div class="thumbnail">
                                 <img src="{{ phone.icon.url }}" alt="" style="width: 40%; height: 40%" >
                                 <div class="caption">
@@ -142,8 +144,8 @@
                                     <h5><strong><a href="{{ phone.get_absolute_url }}">{{ phone.name }}</a></strong></h5>
                                 </div>
                             </div>
-
                         </div>
+
                         {% endif %}
                     {% endfor %}
 

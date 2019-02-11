@@ -13,17 +13,18 @@
                           <li>{{ item.product.name }}</li>
                           <li>Количество: {{ item.quantity }} </li>
                           <li>Цена: {{ item.total_price }}</li>
+                          <br>
                       {% endfor %}
                     </ul>
             </div>
 
             <div class="col-sm-5">
-                <h4>Время, когда вы заберете заказ:</h4>
+{#                <h4>Время, когда вы заберете заказ: </h4>#}
                 <br>
                 <form class="order-form" action="." method="post">
                     {{ form.as_p }}
                     {% csrf_token %}
-                    <input type="submit" class="btn btn-danger" value="Отправить">
+                    <input type="submit" class="btn btn-danger" value="Заказать">
                 </form>
             </div>
 
